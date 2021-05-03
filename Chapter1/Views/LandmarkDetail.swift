@@ -7,36 +7,40 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct LandmarkDetail: View {
+    var landmark: Landmark
+    
     var body: some View {
-        VStack{
-            MapView()//MapView 객체 불러오기
+        ScrollView {
+            MapView(coordinate: landmark.locationCoordinate)//MapView 객체 불러오기
                 .frame(height:300)//크기 지정
-            CircleImage()//CircleImage 객체 불러오기
+            CircleImage(image: landmark.image)//CircleImage 객체 불러오기
                 .offset(y: -130)//위치 지정
                 .padding(.bottom, -130)//아래 공간 지정
             VStack/*여러개의 뷰 수직으로 사용가능*/(alignment: .leading)/*stack의 정렬지정*/ {
-                Text("광화문")/*text값*/
+                Text(landmark.name)/*text값*/
                     .font(.title)/*font값*/
                 HStack/*수평 여러개 뷰*/ {
-                    Text("종로구 세종로 69")
+                    Text(landmark.park)
                     Spacer()//부모 뷰에 속한 공간을 사용
-                    Text("서울특별시")
+                    Text(landmark.state)
                 }
                 .font(.subheadline)
                 .foregroundColor(.secondary)
                 Divider()
-                Text("광화문에 관해")
+                Text("About \(landmark.name)")
                     .font(.title2)
-                Text("경복궁의 정문 광화문에 대한 설명")
+                Text(landmark.description)
             }
             .padding()//해당 뷰의 바깥 공간 추가
             Spacer()
         }
+        .navigationTitle(landmark.name)
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct LandmarkDetail_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
