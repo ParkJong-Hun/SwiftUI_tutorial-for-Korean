@@ -8,7 +8,8 @@
 import Foundation
 
 final class ModelData: ObservableObject {
-    @Published var landmarks: [Landmark] = load("landmarkData.json")//landmark 구조체 양식을 따라 파일을 로드해서 landmarks에 배열로 저장. publi
+    @Published var landmarks: [Landmark] = load("landmarkData.json")//landmark 구조체 양식을 따라 파일을 로드해서 landmarks에 배열로 저장.
+    var hikes: [Hike] = load("hikeData.json")//Hike 구조체 양식을 따라 파일을 로드해서 hikes에 배열로 저장.
 }//관찰 가능한 객체를 구독해 데이터가 변경될 때마다 새로 고침하는 뷰를 업데이트. published를 사용해 구독자가 변경 사항을 선택할 수 있도록 함.
 
 func load<T:Decodable>(_ filename: String) -> T {//로드하는 함수
