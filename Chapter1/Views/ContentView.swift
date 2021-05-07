@@ -8,8 +8,26 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var selection: Tab = .featured//탭을 이용한 selection 상태 변수 생성. 기본값:.featured
+    
+    enum Tab {
+        case featured
+        case list
+    }
+    
     var body: some View {
-        LandmarkList()//LandmarkList.swift를 불러옴
+        TabView(selection: $selection) {
+            CategoryHome()
+                .tabItem {
+                    Label("Featured", systemImage: "star")
+                }//탭 아이템 생성.
+                .tag(Tab.featured)//태그값을 Tab.featured로 함.
+            LandmarkList()//LandmarkList.swift를 불러옴
+                .tabItem {
+                    Label("List", systemImage: "list.bullet")
+                }
+                .tag(Tab.list)//태그값을 Tab.list로 함.
+        }//TabeView로 생성(아래에 탭창이 있음)
     }
 }
 
