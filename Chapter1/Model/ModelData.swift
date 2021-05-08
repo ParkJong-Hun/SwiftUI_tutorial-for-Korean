@@ -10,6 +10,7 @@ import Foundation
 final class ModelData: ObservableObject {
     @Published var landmarks: [Landmark] = load("landmarkData.json")//landmark 구조체 양식을 따라 파일을 로드해서 landmarks에 배열로 저장.
     var hikes: [Hike] = load("hikeData.json")//Hike 구조체 양식을 따라 파일을 로드해서 hikes에 배열로 저장.
+    @Published var profile = Profile.deafault//프로필을 기본값으로 저장.
     
     var features: [Landmark] {
         landmarks.filter { $0.isFeatured }
